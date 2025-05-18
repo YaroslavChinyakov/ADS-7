@@ -14,7 +14,7 @@ class Train {
     Car* first;
 
  public:
-     Train();                   
+     Train();                
     void addCar(bool light);
     int getLength();
     int getOpCount();
