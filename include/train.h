@@ -4,20 +4,20 @@
 
 class Train {
 private:
-    struct Car {
-        bool light;  
-        Car* next;    
-        Car* prev;    
+     struct Car {
+        bool light;
+        Car* next;
+        Car* prev;
     };
 
-    int countOp;   
-    Car* first;    
+    int countOp;
+    Car* first;
 
 public:
-    Train();                       
-    void addCar(bool light);       
-    int getLength();               
-    int getOpCount();              
+    Train();                   
+    void addCar(bool light); 
+    int getLength();    
+    int getOpCount();      
 };
 
 #endif  // INCLUDE_TRAIN_H_
