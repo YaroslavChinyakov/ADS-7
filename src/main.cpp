@@ -25,6 +25,7 @@ int main() {
             for (int i = 0; i < n; ++i) t.addCar(false);
             t.getLength();
             ops_off.push_back(t.getOpCount());
+
             double total = 0;
             for (int rep = 0; rep < M; ++rep) {
                 auto start = std::chrono::high_resolution_clock::now();
@@ -40,6 +41,7 @@ int main() {
             for (int i = 0; i < n; ++i) t.addCar(true);
             t.getLength();
             ops_on.push_back(t.getOpCount());
+
             double total = 0;
             for (int rep = 0; rep < M; ++rep) {
                 auto start = std::chrono::high_resolution_clock::now();
@@ -53,9 +55,11 @@ int main() {
         {
             Train t;
             std::uniform_int_distribution<int> dist(0, 1);
-            for (int i = 0; i < n; ++i) t.addCar(dist(rng));
+            for (int i = 0; i < n; ++i)
+                t.addCar(dist(rng));
             t.getLength();
             ops_rand.push_back(t.getOpCount());
+
             double total = 0;
             for (int rep = 0; rep < M; ++rep) {
                 auto start = std::chrono::high_resolution_clock::now();
@@ -70,17 +74,22 @@ int main() {
     std::ofstream fops("result/ops_data.csv");
     fops << "n,all_off,all_on,random\n";
     for (size_t i = 0; i < ns.size(); ++i) {
-        fops << ns[i] << "," << ops_off[i] << "," << ops_on[i] << "," << ops_rand[i] << "\n";
+        fops << ns[i] << ",";
+        fops << ops_off[i] << ",";
+        fops << ops_on[i] << ",";
+        fops << ops_rand[i] << "\n";
     }
 
     std::ofstream ftime("result/time_data.csv");
     ftime << "n,all_off,all_on,random\n";
     for (size_t i = 0; i < ns.size(); ++i) {
-        ftime << ns[i] << "," << time_off[i] << "," << time_on[i] << "," << time_rand[i] << "\n";
+        ftime << ns[i] << ",";
+        ftime << time_off[i] << ",";
+        ftime << time_on[i] << ",";
+        ftime << time_rand[i] << "\n";
     }
 
-    std::cout << "Experiment data written to result/ops_data.csv and result/time_data.csv\n";
+    std::cout << "Experiment data written to result/ops_data.csv and "
+        "result/time_data.csv\n";
     return 0;
 }
-
-
