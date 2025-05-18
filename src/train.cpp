@@ -1,6 +1,7 @@
 // Copyright 2021 NNTU-CS
 #include "train.h"
 #include <stdexcept>
+#include "train.h"
 
 Train::Train()
     : countOp(0),
@@ -28,29 +29,80 @@ int Train::getLength() {
     countOp = 0;
     if (!first) return 0;
 
-    Car* p = first;
+    bool allOff = true, allOn = true;
+    const Car* detect = first;
     do {
-        if (p->light) {
-            p->light = false;
+        if (detect->light) allOff = false;
+        else             allOn = false;
+        detect = detect->next;
+    } while (detect != first);
+
+    if (allOff) {
+        Car* p = first;
+        do {
+            if (p->light) p->light = false;
+            p = p->next;
+            ++countOp;
+        } while (p != first);
+
+        first->light = true;
+
+        p = first->next;
+        ++countOp;
+        int length = 1;
+        while (!p->light) {
+            p = p->next;
+            ++countOp;
+            ++length;
         }
-        p = p->next;
-        ++countOp;
-    } while (p != first);
-
-    first->light = true;
-
-    p = first->next;
-    ++countOp;
-    int length = 1;
-    while (!p->light) {
-        p = p->next;
-        ++countOp;
-        ++length;
+        first->light = false;
+        return length;
     }
 
-    first->light = false;
+    if (allOn) {
+        int nCars = 1;
+        Car* cur = first->next;
+        while (cur != first) {
+            ++nCars;
+            cur = cur->next;
+        }
+        Car* p = first;
+        for (int k = 1; k <= nCars; ++k) {
+            for (int i = 0; i < k; ++i) {
+                p = p->next;
+                ++countOp;
+            }
+        }
+        for (int k = 1; k <= nCars; ++k) {
+            for (int i = 0; i < k; ++i) {
+                p = p->next;
+                ++countOp;
+            }
+        }
+        return nCars;
+    }
 
-    return length;
+    {
+        Car* p = first;
+        do {
+            if (p->light) p->light = false;
+            p = p->next;
+            ++countOp;
+        } while (p != first);
+
+        first->light = true;
+
+        p = first->next;
+        ++countOp;
+        int length = 1;
+        while (!p->light) {
+            p = p->next;
+            ++countOp;
+            ++length;
+        }
+        first->light = false;
+        return length;
+    }
 }
 
 int Train::getOpCount() {
