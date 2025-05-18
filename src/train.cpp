@@ -32,7 +32,7 @@ int Train::getLength() {
     const Car* detect = first;
     do {
         if (detect->light) allOff = false;
-        else             allOn = false;
+        else               allOn = false;
         detect = detect->next;
     } while (detect != first);
 
@@ -60,12 +60,12 @@ int Train::getLength() {
 
     if (allOn) {
         int nCars = 1;
-        Car* cur = first->next;
+        const Car* cur = first->next;
         while (cur != first) {
             ++nCars;
             cur = cur->next;
         }
-        Car* p = first;
+        const Car* p = first;
         for (int k = 1; k <= nCars; ++k) {
             for (int i = 0; i < k; ++i) {
                 p = p->next;
