@@ -1,2 +1,3 @@
-![plot-1](https://github.com/user-attachments/assets/389303b3-e0cf-4c88-a434-7bd6dc05ff25)
-![plot-2](https://github.com/user-attachments/assets/6baf60b9-9094-47d3-845b-f1b78f7b4b0c)
+
+![plot-1 png](https://github.com/user-attachments/assets/650c255b-3fdb-43eb-b94d-72942f7200f1)
+![plot-2 png](https://github.com/user-attachments/assets/338ec063-0721-42fb-b405-262fd664d766)
